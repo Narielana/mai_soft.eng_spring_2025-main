@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  users-service:
+    build:
+      context: ./users
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    volumes:
+      - ./users:/application
+    restart: always
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DATABASE_URL=postgresql+asyncpg://stud:stud@users-pg:5432/users_pg
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - api-network
+    depends_on:
+      - users-pg
+
+  delivery-service:
+    build:
+      context: ./delivery
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./delivery:/application
+    restart: always
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MONGO_URI=mongodb://stud:stud@mongo:27017/delivery_db
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - api-network
+    depends_on:
+      - mongo
+
+  users-pg:
+    container_name: users-pg
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=stud
+      - POSTGRES_PASSWORD=stud
+      - POSTGRES_DB=users_pg
+      - PGDATA=/data/postgres
+    volumes:
+      - ./pg-init.sql:/docker-entrypoint-initdb.d/pg-init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d users_pg -U stud"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - api-network
+
+  mongo:
+    container_name: mongo
+    image: mongo:5
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=stud
+      - MONGO_INITDB_ROOT_PASSWORD=stud
+      - MONGO_INITDB_DATABASE=delivery_db
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+    networks:
+      - api-network
+
+networks:
+  api-network:
+    driver: bridge
