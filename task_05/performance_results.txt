@@ -1,0 +1,226 @@
+Performance Test Results
+=======================
+Date: Sun May  4 09:54:20 AM UTC 2025
+
+## List Endpoint Tests
+
+Testing: List with cache (Threads: 1, Connections: 10)
+Endpoint: http://localhost:8082/users/list
+--------------------------------------
+Running 10s test @ http://localhost:8082/users/list
+  1 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   101.41ms   43.19ms 384.40ms   93.11%
+    Req/Sec   103.41     22.04   151.00     77.78%
+  Latency Distribution
+     50%   91.40ms
+     75%   93.86ms
+     90%   99.65ms
+     99%  361.20ms
+  1023 requests in 10.01s, 6.74MB read
+Requests/sec:    102.17
+Transfer/sec:    689.66KB
+
+
+Testing: List without cache (Threads: 1, Connections: 10)
+Endpoint: http://localhost:8082/users/list-no-cache
+--------------------------------------
+Running 10s test @ http://localhost:8082/users/list-no-cache
+  1 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   112.99ms   49.35ms 433.54ms   93.98%
+    Req/Sec    93.96     20.13   140.00     78.57%
+  Latency Distribution
+     50%  100.56ms
+     75%  103.97ms
+     90%  128.58ms
+     99%  371.02ms
+  921 requests in 10.01s, 6.07MB read
+Requests/sec:     92.01
+Transfer/sec:    621.09KB
+
+
+Testing: List with cache (Threads: 5, Connections: 10)
+Endpoint: http://localhost:8082/users/list
+--------------------------------------
+Running 10s test @ http://localhost:8082/users/list
+  5 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   100.14ms   42.50ms 490.26ms   94.21%
+    Req/Sec    21.28      5.02    40.00     78.66%
+  Latency Distribution
+     50%   91.75ms
+     75%   93.51ms
+     90%   97.19ms
+     99%  338.93ms
+  1033 requests in 10.01s, 6.81MB read
+Requests/sec:    103.16
+Transfer/sec:    696.31KB
+
+
+Testing: List without cache (Threads: 5, Connections: 10)
+Endpoint: http://localhost:8082/users/list-no-cache
+--------------------------------------
+Running 10s test @ http://localhost:8082/users/list-no-cache
+  5 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   151.84ms   98.48ms 489.48ms   83.58%
+    Req/Sec    15.84      6.97    40.00     86.31%
+  Latency Distribution
+     50%  111.37ms
+     75%  143.06ms
+     90%  349.33ms
+     99%  430.25ms
+  709 requests in 10.01s, 4.67MB read
+Requests/sec:     70.82
+Transfer/sec:    478.01KB
+
+
+Testing: List with cache (Threads: 10, Connections: 10)
+Endpoint: http://localhost:8082/users/list
+--------------------------------------
+Running 10s test @ http://localhost:8082/users/list
+  10 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   105.71ms   53.60ms 521.17ms   93.95%
+    Req/Sec    10.55      3.02    20.00     88.95%
+  Latency Distribution
+     50%   89.88ms
+     75%  107.79ms
+     90%  117.90ms
+     99%  369.27ms
+  998 requests in 10.01s, 6.57MB read
+  Socket errors: connect 0, read 2, write 0, timeout 0
+  Non-2xx or 3xx responses: 2
+Requests/sec:     99.65
+Transfer/sec:    671.35KB
+
+
+Testing: List without cache (Threads: 10, Connections: 10)
+Endpoint: http://localhost:8082/users/list-no-cache
+--------------------------------------
+Running 10s test @ http://localhost:8082/users/list-no-cache
+  10 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   114.05ms   54.10ms 432.21ms   91.69%
+    Req/Sec     9.79      2.01    20.00     91.41%
+  Latency Distribution
+     50%   99.61ms
+     75%  102.86ms
+     90%  128.70ms
+     99%  388.81ms
+  917 requests in 10.02s, 6.04MB read
+Requests/sec:     91.55
+Transfer/sec:    617.97KB
+
+
+## Get Endpoint Tests
+
+Testing: Get with cache (Threads: 1, Connections: 10)
+Endpoint: http://localhost:8082/users/get?user_id=1
+--------------------------------------
+Running 10s test @ http://localhost:8082/users/get?user_id=1
+  1 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    28.72ms   19.27ms 258.02ms   94.91%
+    Req/Sec   378.28     61.88   430.00     88.89%
+  Latency Distribution
+     50%   25.17ms
+     75%   25.89ms
+     90%   27.13ms
+     99%  136.72ms
+  3741 requests in 10.01s, 807.38KB read
+Requests/sec:    373.83
+Transfer/sec:     80.68KB
+
+
+Testing: Get without cache (Threads: 1, Connections: 10)
+Endpoint: http://localhost:8082/users/get-no-cache?user_id=1
+--------------------------------------
+Running 10s test @ http://localhost:8082/users/get-no-cache?user_id=1
+  1 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    34.32ms   22.77ms 271.85ms   96.50%
+    Req/Sec   323.57     35.96   350.00     96.91%
+  Latency Distribution
+     50%   30.42ms
+     75%   31.11ms
+     90%   32.03ms
+     99%  175.20ms
+  3154 requests in 10.00s, 680.82KB read
+Requests/sec:    315.38
+Transfer/sec:     68.08KB
+
+
+Testing: Get with cache (Threads: 5, Connections: 10)
+Endpoint: http://localhost:8082/users/get?user_id=1
+--------------------------------------
+Running 10s test @ http://localhost:8082/users/get?user_id=1
+  5 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    28.51ms   17.25ms 249.83ms   96.79%
+    Req/Sec    75.21     10.93    90.00     90.08%
+  Latency Distribution
+     50%   25.81ms
+     75%   26.62ms
+     90%   27.70ms
+     99%  132.50ms
+  3722 requests in 10.01s, 803.28KB read
+Requests/sec:    371.83
+Transfer/sec:     80.25KB
+
+
+Testing: Get without cache (Threads: 5, Connections: 10)
+Endpoint: http://localhost:8082/users/get-no-cache?user_id=1
+--------------------------------------
+Running 10s test @ http://localhost:8082/users/get-no-cache?user_id=1
+  5 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    36.54ms   21.36ms 244.05ms   90.21%
+    Req/Sec    58.52     14.08    80.00     80.24%
+  Latency Distribution
+     50%   30.30ms
+     75%   31.31ms
+     90%   57.80ms
+     99%  150.41ms
+  2908 requests in 10.01s, 627.61KB read
+Requests/sec:    290.43
+Transfer/sec:     62.68KB
+
+
+Testing: Get with cache (Threads: 10, Connections: 10)
+Endpoint: http://localhost:8082/users/get?user_id=1
+--------------------------------------
+Running 10s test @ http://localhost:8082/users/get?user_id=1
+  10 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    32.43ms   26.70ms 233.70ms   94.20%
+    Req/Sec    36.50      8.43    50.00     88.06%
+  Latency Distribution
+     50%   25.10ms
+     75%   25.87ms
+     90%   51.71ms
+     99%  166.85ms
+  3532 requests in 10.01s, 762.28KB read
+Requests/sec:    352.90
+Transfer/sec:     76.16KB
+
+
+Testing: Get without cache (Threads: 10, Connections: 10)
+Endpoint: http://localhost:8082/users/get-no-cache?user_id=1
+--------------------------------------
+Running 10s test @ http://localhost:8082/users/get-no-cache?user_id=1
+  10 threads and 10 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    35.25ms   23.20ms 274.87ms   94.18%
+    Req/Sec    31.21      7.36    40.00     60.37%
+  Latency Distribution
+     50%   29.89ms
+     75%   30.94ms
+     90%   33.71ms
+     99%  163.44ms
+  3062 requests in 10.01s, 660.84KB read
+Requests/sec:    305.89
+Transfer/sec:     66.02KB
+
+
